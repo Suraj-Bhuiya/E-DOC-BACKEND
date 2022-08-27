@@ -1,0 +1,9 @@
+"user": {
+      "name": "Alay Naru",
+      "email": "alay@gmail.com",
+      "photo": "default.jpg",
+      "userType": "user",
+      "active": true,
+      "_id": "62ebe803d74a35e8bff0897b",
+      "__v": 0
+    }
