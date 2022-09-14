@@ -13,7 +13,7 @@ exports.deleteOne = (Model) =>
     }
 
     if (Model === Edoc) {
-      const user = await User.findById(req.query.user);
+      const user = await User.findById(req.user._id);
 
       if (!user) {
         return next(new AppError('No User found with that ID', 404));
@@ -62,7 +62,7 @@ exports.createOne = (Model) =>
     const doc = await Model.create(req.body);
 
     if (Model === Edoc) {
-      const user = await User.findById(req.body.userId);
+      const user = await User.findById(req.user._id);
 
       if (!user) {
         return next(new AppError('No User found with that ID', 404));

@@ -13,7 +13,7 @@ exports.updateEdoc = factory.updateOne(Edoc);
 exports.deleteEdoc = factory.deleteOne(Edoc);
 
 exports.getAllUserEdoc = catchAsync(async (req, res, next) => {
-  const uid = req.query.uid;
+  const uid = req.params.uid;
 
   const user = await User.findOne({ uid: uid });
 
@@ -24,7 +24,7 @@ exports.getAllUserEdoc = catchAsync(async (req, res, next) => {
     status: 'success',
 
     data: {
-      user,
+      edocs: user.edocs,
     },
   });
 });

@@ -38,20 +38,22 @@ const createSendToken = (user, statusCode, res) => {
   });
 };
 
-exports.singup = catchAsync(async (req, res) => {
+exports.signup = catchAsync(async (req, res) => {
   const utilDoc = await Util.find();
-  console.log(utilDoc);
+  console.log(utilDoc, req.body);
   const newUser = await User.create({
     name: req.body.name,
     email: req.body.email,
     phoneNo: req.body.phoneNo,
     bio: req.body.bio,
     password: req.body.password,
-    passwordConfirm: req.body.passwordConfirm,
+    confirmPassword: req.body.confirmPassword,
     passwordChangedAt: req.body.passwordChangedAt,
     userType: req.body.userType,
     uid: `U${utilDoc[0].uidCount}`,
   });
+
+  console.log(newUser);
 
   const UtilUpdated = await Util.findByIdAndUpdate(utilDoc[0]._id, {
     uidCount: utilDoc[0].uidCount + 1,
@@ -227,7 +229,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     return next(new AppError('Token is Invalid or Expired', 400));
   }
   user.password = req.body.password;
-  user.passwordConfirm = req.body.passwordConfirm;
+  user.confirmPassword = req.body.confirmPassword;
   user.passwordResetToken = undefined;
   user.passwordResetExpires = undefined;
 
@@ -249,7 +251,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   }
   //3)if the password is correct Update the password
   user.password = req.body.password;
-  user.passwordConfirm = req.body.passwordConfirm;
+  user.confirmPassword = req.body.confirmPassword;
   await user.save();
   //4) log the user in send jwt
   createSendToken(user, 200, res);

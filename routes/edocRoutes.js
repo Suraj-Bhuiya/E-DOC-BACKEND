@@ -7,10 +7,9 @@ const router = express.Router();
 
 router.get('/:id', edocController.getEdoc);
 
-router.get('/', edocController.getAllUserEdoc);
-
 // Protects all routes after this middleware
 router.use(authController.protect);
+router.get('/uid/:uid', edocController.getAllUserEdoc);
 
 router.post('/', edocController.createEdoc);
 
