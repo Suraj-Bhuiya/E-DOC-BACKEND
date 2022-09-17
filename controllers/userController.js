@@ -92,11 +92,12 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     'email',
     'phoneNo',
     'bio',
-    'url'
+    'photo',
+    'profession'
   );
 
-  if (req.file) filteredBody.photo = req.file.filename;
-  console.log(filteredBody, req.body);
+  // if (req.file) filteredBody.photo = req.file.filename;
+  // console.log(filteredBody, req.body);
 
   //3)Update user document
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {

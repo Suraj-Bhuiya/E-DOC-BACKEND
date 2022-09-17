@@ -15,10 +15,7 @@ const edocSchema = new mongoose.Schema({
 });
 
 // edocSchema.pre(/^find/, function(next) {
-//     this.populate({
-//         path: 'user',
-//         select: 'name _id',
-//     }) ;
+
 // })
 
 const Edoc = mongoose.model('Edoc', edocSchema);

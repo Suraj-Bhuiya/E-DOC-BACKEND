@@ -19,18 +19,18 @@ const UserSchema = new mongoose.Schema({
     validate: [validator.isEmail, 'Please provide a valid email'],
   },
   phoneNo: {
-    type: Number,
+    type: String,
   },
   bio: {
     type: String,
   },
   photo: {
     type: String,
-    default: 'default.jpg',
   },
-  url: {
+  profession: {
     type: String,
   },
+
   userType: {
     type: String,
     enum: ['user', 'verifier', 'admin'],
@@ -89,7 +89,7 @@ UserSchema.pre(/^find/, function (next) {
 UserSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'edocs',
-    select: 'name url',
+    select: 'name  url createdAt',
   });
 
   next();
